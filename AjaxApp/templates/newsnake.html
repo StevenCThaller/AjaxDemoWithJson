@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Information for {{snake.name}}</h2>
+        </div>
+        <div class="row">
+            <a href="/snakes">Home</a> | <a href="/snakes/all">View All Snakes</a>
+        </div>
+        <div class="row">
+            <p><span class="h4">Name:</span> {{snake.name}}</p>
+            <p><span class="h4">Length:</span> {{snake.length}} feet</p>
+            <p><span class="h4">Venomous:</span>{% if snake.venomous %}Yes{% else %}No{% endif %}</p>
+        </div>
+    </div>
+</body>
+
+</html>

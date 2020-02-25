@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // $(document).on('click', '.seeSnake', function (e) {
+            //     // e.preventDefault();
+            //     $.get(`/ajax/snakes/${$(this).attr('id')}`, function (data) {
+            //         console.log(data);
+            //         if (JSON.parse(data).length > 0) {
+            //             var snake = JSON.parse(data)[0].fields;
+            //             var venomous = "No";
+            //             if (snake.venomous == true) {
+            //                 venomous = "Yes"
+            //             }
+            //             var toAppend = `<p><span class="h4">Name:</span> ${snake.name}</p>
+            //                 <p><span class="h4">Length:</span> ${snake.length} feet</p>
+            //                 <p><span class="h4">Venomous:</span>${venomous}</p>`;
+            //             $("#snakeInfo").html(toAppend);
+            //         }
+            //         else {
+            //             $("#snakeInfo").html("");
+            //         }
+            //     })
+            // })
+        })
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Check out all these slithery snakes!</h1>
+        <div class="row">
+            <a href="/snakes">Home</a> | <a href="/snakes/new">Add a Snake</a>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table">
+                    <thead>
+                        <th>Name</th>
+                        <th>Length</th>
+                        <th>Venomous</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        {% for snake in all_snakes %}
+                        <tr>
+                            <td><a class="seeSnake" id="{{snake.id}}" href="/snakes/{{snake.id}}">{{snake.name}}</a>
+                            </td>
+                            <td>{{snake.length}} feet</td>
+                            <td>
+                                {% if snake.venomous == True %}
+                                Yes
+                                {% else %}
+                                No
+                                {% endif %}
+                            </td>
+                            <td><a id="snakeNumber{{snake.id}}" class="deleteSnake"
+                                    href="/snakes/delete/{{snake.id}}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4" id="snakeInfo"></div>
+        </div>
+
+    </div>
+</body>
+
+</html>
